@@ -82,7 +82,7 @@ function Index() {
       <div className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
         <Navbar active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <main>
-          <Hero />
+          <Hero identityIdx={identityIdx} />
           <About />
           <Journey />
           <Skills />
