@@ -2,14 +2,14 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { ArrowLeft, Quote } from "lucide-react";
 import { PageShell } from "@/components/site/layout";
-import { ABOUT_CONTENT } from "@/components/site/about-content";
+import { ABOUT_CONTENT, type AboutContent } from "@/components/site/about-content";
 import type { AboutSlug } from "@/components/site/data";
 
 export const Route = createFileRoute("/about/$topic")({
   loader: ({ params }) => {
-    const content = ABOUT_CONTENT[params.topic as AboutSlug];
+    const content: AboutContent | undefined = ABOUT_CONTENT[params.topic as AboutSlug];
     if (!content) throw notFound();
-    return { content };
+    return { content: content as AboutContent };
   },
   head: ({ loaderData }) => ({
     meta: loaderData ? [

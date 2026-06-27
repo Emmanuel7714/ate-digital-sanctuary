@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutTopicRouteImport } from './routes/about.$topic'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -28,34 +29,42 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutTopicRoute = AboutTopicRouteImport.update({
+  id: '/$topic',
+  path: '/$topic',
+  getParentRoute: () => AboutRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/about': typeof AboutRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/about/$topic': typeof AboutTopicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/about': typeof AboutRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/about/$topic': typeof AboutTopicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/about': typeof AboutRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/about/$topic': typeof AboutTopicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/sitemap.xml'
+  fullPaths: '/' | '/about' | '/sitemap.xml' | '/about/$topic'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/sitemap.xml'
-  id: '__root__' | '/' | '/about' | '/sitemap.xml'
+  to: '/' | '/about' | '/sitemap.xml' | '/about/$topic'
+  id: '__root__' | '/' | '/about' | '/sitemap.xml' | '/about/$topic'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  AboutRoute: typeof AboutRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -82,12 +91,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/$topic': {
+      id: '/about/$topic'
+      path: '/$topic'
+      fullPath: '/about/$topic'
+      preLoaderRoute: typeof AboutTopicRouteImport
+      parentRoute: typeof AboutRoute
+    }
   }
 }
 
+interface AboutRouteChildren {
+  AboutTopicRoute: typeof AboutTopicRoute
+}
+
+const AboutRouteChildren: AboutRouteChildren = {
+  AboutTopicRoute: AboutTopicRoute,
+}
+
+const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  AboutRoute: AboutRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
