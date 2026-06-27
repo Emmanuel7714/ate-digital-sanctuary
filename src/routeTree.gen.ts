@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SkillsRouteImport } from './routes/skills'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ReflectionsRouteImport } from './routes/reflections'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as AboutRouteImport } from './routes/about'
@@ -25,6 +26,11 @@ const SkillsRoute = SkillsRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReflectionsRoute = ReflectionsRouteImport.update({
+  id: '/reflections',
+  path: '/reflections',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRouteWithChildren
   '/journey': typeof JourneyRoute
   '/projects': typeof ProjectsRoute
+  '/reflections': typeof ReflectionsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/skills': typeof SkillsRoute
   '/about/$topic': typeof AboutTopicRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRouteWithChildren
   '/journey': typeof JourneyRoute
   '/projects': typeof ProjectsRoute
+  '/reflections': typeof ReflectionsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/skills': typeof SkillsRoute
   '/about/$topic': typeof AboutTopicRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRouteWithChildren
   '/journey': typeof JourneyRoute
   '/projects': typeof ProjectsRoute
+  '/reflections': typeof ReflectionsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/skills': typeof SkillsRoute
   '/about/$topic': typeof AboutTopicRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/journey'
     | '/projects'
+    | '/reflections'
     | '/sitemap.xml'
     | '/skills'
     | '/about/$topic'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/journey'
     | '/projects'
+    | '/reflections'
     | '/sitemap.xml'
     | '/skills'
     | '/about/$topic'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/journey'
     | '/projects'
+    | '/reflections'
     | '/sitemap.xml'
     | '/skills'
     | '/about/$topic'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRouteWithChildren
   JourneyRoute: typeof JourneyRoute
   ProjectsRoute: typeof ProjectsRoute
+  ReflectionsRoute: typeof ReflectionsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SkillsRoute: typeof SkillsRoute
 }
@@ -134,6 +147,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reflections': {
+      id: '/reflections'
+      path: '/reflections'
+      fullPath: '/reflections'
+      preLoaderRoute: typeof ReflectionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -189,6 +209,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRouteWithChildren,
   JourneyRoute: JourneyRoute,
   ProjectsRoute: ProjectsRoute,
+  ReflectionsRoute: ReflectionsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SkillsRoute: SkillsRoute,
 }
