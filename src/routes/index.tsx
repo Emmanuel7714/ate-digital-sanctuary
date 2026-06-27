@@ -221,7 +221,7 @@ function SectionHeader({ kicker, title, accent, subtitle }: { kicker: string; ti
 }
 
 /* ---------------- Hero ---------------- */
-function Hero() {
+function Hero({ identityIdx }: { identityIdx: number }) {
   return (
     <section id="home" className="relative isolate overflow-hidden pt-32 lg:pt-40">
       {/* Background grid + glows */}
@@ -258,14 +258,14 @@ function Hero() {
               <span className="text-foreground/60">I am a</span>
               <AnimatePresence mode="wait">
                 <motion.span
-                  key={identityKey()}
+                  key={IDENTITY[identityIdx]}
                   initial={{ y: 12, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -12, opacity: 0 }}
                   transition={{ duration: 0.35 }}
                   className="text-gradient-blue font-semibold"
                 >
-                  {IDENTITY[useIdentityIndex()]}
+                  {IDENTITY[identityIdx]}
                 </motion.span>
               </AnimatePresence>
             </div>
@@ -337,24 +337,6 @@ function Hero() {
       </div>
     </section>
   );
-}
-
-// helpers to share identity state between rotation effect and AnimatePresence
-let __identityIndex = 0;
-function useIdentityIndex() {
-  // simple read of the parent state via DOM is messy — instead we use a module index updated by an effect below
-  const [, setTick] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => {
-      __identityIndex = (__identityIndex + 1) % IDENTITY.length;
-      setTick((x) => x + 1);
-    }, 2200);
-    return () => clearInterval(t);
-  }, []);
-  return __identityIndex;
-}
-function identityKey() {
-  return IDENTITY[__identityIndex];
 }
 
 function Stat({ n, label }: { n: string; label: string }) {
