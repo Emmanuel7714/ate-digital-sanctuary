@@ -14,6 +14,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ReflectionsRouteImport } from './routes/reflections'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as JourneyRouteImport } from './routes/journey'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutTopicRouteImport } from './routes/about.$topic'
@@ -43,6 +44,11 @@ const JourneyRoute = JourneyRouteImport.update({
   path: '/journey',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -62,6 +68,7 @@ const AboutTopicRoute = AboutTopicRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRouteWithChildren
+  '/gallery': typeof GalleryRoute
   '/journey': typeof JourneyRoute
   '/projects': typeof ProjectsRoute
   '/reflections': typeof ReflectionsRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRouteWithChildren
+  '/gallery': typeof GalleryRoute
   '/journey': typeof JourneyRoute
   '/projects': typeof ProjectsRoute
   '/reflections': typeof ReflectionsRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRouteWithChildren
+  '/gallery': typeof GalleryRoute
   '/journey': typeof JourneyRoute
   '/projects': typeof ProjectsRoute
   '/reflections': typeof ReflectionsRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/gallery'
     | '/journey'
     | '/projects'
     | '/reflections'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/gallery'
     | '/journey'
     | '/projects'
     | '/reflections'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/gallery'
     | '/journey'
     | '/projects'
     | '/reflections'
@@ -126,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRouteWithChildren
+  GalleryRoute: typeof GalleryRoute
   JourneyRoute: typeof JourneyRoute
   ProjectsRoute: typeof ProjectsRoute
   ReflectionsRoute: typeof ReflectionsRoute
@@ -170,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JourneyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -207,6 +227,7 @@ const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRouteWithChildren,
+  GalleryRoute: GalleryRoute,
   JourneyRoute: JourneyRoute,
   ProjectsRoute: ProjectsRoute,
   ReflectionsRoute: ReflectionsRoute,
