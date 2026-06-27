@@ -48,7 +48,7 @@ function TopicPage() {
           </p>
         </motion.div>
         <div className="mt-10 space-y-6 text-base leading-relaxed text-foreground/85 sm:text-[17px]">
-          {content.paragraphs.map((p, i) => {
+          {content.paragraphs.map((p: string | { quote: string }, i: number) => {
             if (typeof p === "string") {
               return (
                 <motion.p
