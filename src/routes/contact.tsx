@@ -29,14 +29,28 @@ function ContactPage() {
         >
           <div>
             <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Email</div>
-            <a href="mailto:adenijitaiwoemmanuel@gmail.com" className="mt-1 flex items-center gap-2 font-display text-lg hover:text-gold">
-              <Mail className="h-4 w-4" /> adenijitaiwoemmanuel@gmail.com
+            <a href="mailto:emmanueltaiwo920@gmail.com" className="mt-1 flex items-center gap-2 font-display text-lg hover:text-gold">
+              <Mail className="h-4 w-4" /> emmanueltaiwo920@gmail.com
+            </a>
+          </div>
+          <div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Phone</div>
+            <a href="tel:+2349028858436" className="mt-1 flex items-center gap-2 font-display text-lg hover:text-gold">
+              <Phone className="h-4 w-4" /> +234 902 885 8436
             </a>
           </div>
           <div>
             <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Location</div>
             <div className="mt-1 flex items-center gap-2 font-display text-lg">
               <MapPin className="h-4 w-4" /> Benin City, Nigeria
+            </div>
+          </div>
+          <div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Socials</div>
+            <div className="mt-2 flex flex-wrap gap-2 text-sm">
+              <a href="https://www.facebook.com/HisnameisEmmanuel" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 transition hover:border-gold/40 hover:text-gold">Facebook</a>
+              <a href="https://x.com/G3n1us_m1nd3d" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 transition hover:border-gold/40 hover:text-gold">X / Twitter</a>
+              <a href="https://www.linkedin.com/in/emmanuel-taiwo-7a74b6394" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 transition hover:border-gold/40 hover:text-gold">LinkedIn</a>
             </div>
           </div>
           <div className="rounded-xl border border-electric/20 bg-electric/5 p-4 text-sm text-foreground/80">
