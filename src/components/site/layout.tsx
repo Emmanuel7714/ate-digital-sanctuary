@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight, ArrowUp, Github, Instagram, Linkedin, Mail, Menu, X } from "lucide-react";
+import { ArrowRight, ArrowUp, ExternalLink, Linkedin, Mail, Menu, Phone, X } from "lucide-react";
 import emblemAsset from "@/assets/ate-emblem.png.asset.json";
 import { NAV } from "./data";
 
