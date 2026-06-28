@@ -83,10 +83,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "Adeniji Taiwo Emmanuel" },
       { name: "theme-color", content: "#0F172A" },
       { property: "og:title", content: "Adeniji Taiwo Emmanuel — Faith. Technology. Purpose." },
-      { property: "og:description", content: "Believer • Cybersecurity Analyst • Technology Enthusiast • Leader • Geomatics Student." },
+      { property: "og:description", content: "Personal site of Adeniji Taiwo Emmanuel (ATE) — Believer, Cybersecurity Analyst, Technology Enthusiast, Leader, and Geomatics Student." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Adeniji Taiwo Emmanuel — Faith. Technology. Purpose." },
+      { name: "twitter:description", content: "Personal site of Adeniji Taiwo Emmanuel (ATE) — Believer, Cybersecurity Analyst, Technology Enthusiast, Leader, and Geomatics Student." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/44dfb0a7-dab5-465f-8670-252770ca1042" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/44dfb0a7-dab5-465f-8670-252770ca1042" },
     ],
     links: [
       {
