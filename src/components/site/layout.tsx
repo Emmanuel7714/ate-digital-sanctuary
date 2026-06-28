@@ -163,10 +163,10 @@ function Footer() {
             <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Connect</div>
             <div className="mt-4 flex gap-2">
               {[
-                { i: <Github className="h-4 w-4" />, href: "#", label: "GitHub" },
-                { i: <Linkedin className="h-4 w-4" />, href: "#", label: "LinkedIn" },
-                { i: <Instagram className="h-4 w-4" />, href: "#", label: "Instagram" },
-                { i: <Mail className="h-4 w-4" />, href: "mailto:adeniji.taiwo@example.com", label: "Email" },
+                { i: <ExternalLink className="h-4 w-4" />, href: "https://www.facebook.com/HisnameisEmmanuel", label: "Facebook" },
+                { i: <Linkedin className="h-4 w-4" />, href: "https://www.linkedin.com/in/emmanuel-taiwo-7a74b6394", label: "LinkedIn" },
+                { i: <ExternalLink className="h-4 w-4" />, href: "https://x.com/G3n1us_m1nd3d", label: "X / Twitter" },
+                { i: <Mail className="h-4 w-4" />, href: "mailto:emmanueltaiwo920@gmail.com", label: "Email" },
               ].map((s) => (
                 <a key={s.label} href={s.href} aria-label={s.label} className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition hover:border-gold/40 hover:text-gold">
                   {s.i}
