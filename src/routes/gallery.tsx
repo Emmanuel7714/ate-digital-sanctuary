@@ -1,9 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { PageShell, SectionHeader } from "@/components/site/layout";
-import portrait from "@/assets/ate-portrait.jpg";
-import casual from "@/assets/ate-casual.jpg";
-import emblem from "@/assets/ate-emblem.png";
+import portraitAsset from "@/assets/ate-portrait.jpg.asset.json";
+import casualAsset from "@/assets/ate-casual.jpg.asset.json";
+import emblemAsset from "@/assets/ate-emblem.png.asset.json";
+
+const portrait = portraitAsset.url;
+const casual = casualAsset.url;
+const emblem = emblemAsset.url;
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
