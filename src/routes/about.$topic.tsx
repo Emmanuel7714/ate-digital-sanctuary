@@ -4,6 +4,11 @@ import { ArrowLeft, Quote } from "lucide-react";
 import { PageShell } from "@/components/site/layout";
 import { ABOUT_CONTENT, type AboutContent } from "@/components/site/about-content";
 import type { AboutSlug } from "@/components/site/data";
+import cybercrimeImg from "@/assets/cybercrime-overview.jpg.asset.json";
+
+const IMAGE_MAP: Record<string, { url: string }> = {
+  "cybercrime-overview": cybercrimeImg,
+};
 
 export const Route = createFileRoute("/about/$topic")({
   loader: ({ params }) => {
@@ -48,7 +53,7 @@ function TopicPage() {
           </p>
         </motion.div>
         <div className="mt-10 space-y-6 text-base leading-relaxed text-foreground/85 sm:text-[17px]">
-          {content.paragraphs.map((p: string | { quote: string }, i: number) => {
+          {content.paragraphs.map((p: AboutContent["paragraphs"][number], i: number) => {
             if (typeof p === "string") {
               return (
                 <motion.p
@@ -60,6 +65,36 @@ function TopicPage() {
                 >
                   {p}
                 </motion.p>
+              );
+            }
+            if ("heading" in p) {
+              return (
+                <motion.h2
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.35 }}
+                  className="!mt-12 font-display text-2xl font-semibold text-gold sm:text-3xl"
+                >
+                  {p.heading}
+                </motion.h2>
+              );
+            }
+            if ("image" in p) {
+              const asset = IMAGE_MAP[p.image];
+              if (!asset) return null;
+              return (
+                <motion.figure
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4 }}
+                  className="!my-8 overflow-hidden rounded-2xl border border-white/10"
+                >
+                  <img src={asset.url} alt={p.alt ?? ""} className="w-full" loading="lazy" />
+                </motion.figure>
               );
             }
             return (
