@@ -5,7 +5,7 @@ export interface AboutContent {
   title: string;
   kicker: string;
   intro: string;
-  paragraphs: (string | { quote: string })[];
+  paragraphs: (string | { quote: string } | { heading: string } | { image: string; alt?: string })[];
   closing?: string;
 }
 
