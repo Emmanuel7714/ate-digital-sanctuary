@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { ArrowLeft, Quote } from "lucide-react";
 import { PageShell } from "@/components/site/layout";
-import { getWriting, type Writing } from "@/components/site/writings-content";
+import { getWriting, type WritingParagraph } from "@/components/site/writings-content";
 
 export const Route = createFileRoute("/writings/$slug")({
   loader: ({ params }) => {
@@ -60,7 +60,7 @@ function WritingPage() {
           </motion.figure>
         )}
         <div className="mt-10 space-y-6 text-base leading-relaxed text-foreground/85 sm:text-[17px]">
-          {writing.paragraphs.map((p: Writing["paragraphs"][number], i: number) => {
+          {writing.paragraphs.map((p: WritingParagraph, i: number) => {
             if (typeof p === "string") {
               return (
                 <motion.p key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.35 }}>
@@ -73,6 +73,30 @@ function WritingPage() {
                 <motion.h2 key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.35 }} className="!mt-10 font-display text-2xl font-semibold text-gold">
                   {p.heading}
                 </motion.h2>
+              );
+            }
+            if ("stanza" in p) {
+              return (
+                <motion.div key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.4 }} className="font-display text-lg leading-[1.9] text-foreground/90 sm:text-xl">
+                  {p.stanza.map((line, j) => (
+                    <div key={j}>{line}</div>
+                  ))}
+                </motion.div>
+              );
+            }
+            if ("verse" in p) {
+              return (
+                <motion.blockquote key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.35 }} className="border-l-2 border-gold/60 pl-5 italic text-foreground/85">
+                  <p>&ldquo;{p.verse}&rdquo;</p>
+                  {p.ref && <footer className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-gold/80">— {p.ref}</footer>}
+                </motion.blockquote>
+              );
+            }
+            if ("image" in p) {
+              return (
+                <motion.figure key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.4 }} className="!my-8 overflow-hidden rounded-2xl border border-white/10">
+                  <img src={p.image.url} alt={p.image.alt} className="w-full" loading="lazy" />
+                </motion.figure>
               );
             }
             return (
